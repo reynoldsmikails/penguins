@@ -1,0 +1,40 @@
+---
+title: "Penguins"
+author: "Mikaila Reynolds"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = "https://mirrors.nics.utk.edu/cran/")
+contrib.url("https://mirrors.nics.utk.edu/cran/")
+install.packages("palmerpenguins")
+library(palmerpenguins)
+library(tidyverse)
+```
+
+# Data
+- hella penguins yo! 
+- pic: 
+# Single trait distribution
+```{r}
+penguins %>%
+  ggplot() +
+  geom_density(mapping = aes(x = bill_length_mm, fill=species), alpha=0.5)
+```
+# Relationship between multiple traits
+```{r}
+penguins %>%
+  ggplot(mapping = aes(x = body_mass_g, y=flipper_length_mm, color=species)) +
+  geom_point() +
+  geom_smooth(method="lm")
+```
+# Sexual dimorphism
+```{r}
+penguins %>%
+  ggplot(mapping = aes(x = bill_length_mm, y=bill_depth_mm, color=sex)) +
+  geom_point(size=1) +
+  facet_wrap(~species)
+```
+
